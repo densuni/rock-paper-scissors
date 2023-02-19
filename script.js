@@ -79,7 +79,7 @@ function game() {
   }
   
   // compare the player's and computer's scores and announce the winner of the game
-  console.log("-------------------------------");
+  console.log("---------------------------------");
   console.log("Game over!");
   if (scorePlayer == scoreComputer) {
     console.log("It's a tie!");
