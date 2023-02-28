@@ -1,4 +1,6 @@
 const selectionButtons = document.querySelectorAll('[data-selection]');
+const computerScoreSpan = document.querySelector('[data-computer-score]');
+const playerScoreSpan = document.querySelector('[data-player-score]');
 const selections = ["rock", "paper", "scissors"];
 let playerSelection;
 let computerSelection;
@@ -6,11 +8,8 @@ let computerSelection;
 selectionButtons.forEach(selectionButton => {
   selectionButton.addEventListener('click', e => {
     playerSelection = selectionButton.dataset.selection;
-    console.log(playerSelection);
     computerSelection = randomSelection();
-    console.log(computerSelection);
-    const result = checkWinner();
-    console.log(result);
+    checkWinner();
   });
 });
 
@@ -20,15 +19,30 @@ function randomSelection() {
 }
 
 function checkWinner() {
+  let result = "";
   if (playerSelection == computerSelection) {
-    return "Tie";
+    result = "It's a tie!";
   } else if (
     (playerSelection == "rock" && computerSelection == "scissors") ||
     (playerSelection == "paper" && computerSelection == "rock") ||
     (playerSelection == "scissors" && computerSelection == "paper")
   ){
-    return "Player";
+    incrementScore(playerScoreSpan);
+    result = `You Win! ${playerSelection} beats ${computerSelection}`;
+    if(playerScoreSpan.innerText == 5) {
+      result = 'Game over! You won the game!';
+    }
   } else {
-    return "Computer";
-  }
+    incrementScore(computerScoreSpan);
+    result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+    if(playerScoreSpan.innerText == 5) {
+      result = 'Game over! Computer won the game!';
+    }
+  } 
+  document.getElementById('results').innerHTML = result;
+  return;
+}
+
+function incrementScore(scoreSpan) {
+  scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1;
 }
