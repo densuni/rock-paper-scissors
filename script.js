@@ -9,7 +9,7 @@ selectionButtons.forEach(selectionButton => {
   selectionButton.addEventListener('click', e => {
     playerSelection = selectionButton.dataset.selection;
     computerSelection = randomSelection();
-    checkWinner();
+    playRound();
   });
 });
 
@@ -18,7 +18,7 @@ function randomSelection() {
   return selections[randomIndex];
 }
 
-function checkWinner() {
+function playRound() {
   let result = "";
   if (playerSelection == computerSelection) {
     result = "It's a tie!";
@@ -30,13 +30,17 @@ function checkWinner() {
     incrementScore(playerScoreSpan);
     result = `You Win! ${playerSelection} beats ${computerSelection}`;
     if(playerScoreSpan.innerText == 5) {
-      result = 'Game over! You won the game!';
+      result = `Game over! You won the game!
+      <br>Reload the page to start again.`;
+      disableButtons();
     }
   } else {
     incrementScore(computerScoreSpan);
     result = `You Lose! ${computerSelection} beats ${playerSelection}`;
-    if(playerScoreSpan.innerText == 5) {
-      result = 'Game over! Computer won the game!';
+    if(computerScoreSpan.innerText == 5) {
+      result = `Game over! Computer won the game!
+      <br>Reload the page to start again.`;
+      disableButtons();
     }
   } 
   document.getElementById('results').innerHTML = result;
@@ -45,4 +49,10 @@ function checkWinner() {
 
 function incrementScore(scoreSpan) {
   scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1;
+}
+
+function disableButtons() {
+  selectionButtons.forEach(elem => {
+      elem.disabled = true
+  });
 }
