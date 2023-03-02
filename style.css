@@ -1,0 +1,36 @@
+body {
+  font-family: Roboto, sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+#selections {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.selection {
+  font-size: 24px;
+  padding: 10px 20px;
+}
+
+#score,
+#results {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#score {
+  font-size: 22px;
+  gap: 30px;
+}
+
+#results {
+  font-size: 16px;
+  text-align: center;
+}
